@@ -43,7 +43,7 @@ contract MyStrategy is BaseStrategy {
 
     // We add liquidity here
     address public constant CURVE_POOL =
-        0x3E01dD8a5E1fb3481F0F589056b428Fc308AF0Fb;
+        0x960ea3e3C7FB317332d990873d354E18d7645590;
     // Swap here
     address public constant SUSHISWAP_ROUTER =
         0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506;
@@ -81,15 +81,15 @@ contract MyStrategy is BaseStrategy {
         performanceFeeStrategist = _feeConfig[1];
         withdrawalFee = _feeConfig[2];
 
+        // Gauge at time of deployment, can be changed via setGauge
+        gauge = 0x97e2768e8e73511ca874545dc5ff8067eb19b787;
+
         /// @dev do one off approvals here
         IERC20Upgradeable(want).safeApprove(gauge, type(uint256).max);
         IERC20Upgradeable(reward).safeApprove(
             SUSHISWAP_ROUTER,
             type(uint256).max
         );
-
-        // Gauge at time of deployment, can be changed via setGauge
-        gauge = 0xC2b1DF84112619D190193E48148000e3990Bf627;
     }
 
     /// @dev Governance Set new Gauge Function
